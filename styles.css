@@ -210,12 +210,12 @@ input[aria-invalid="true"], select[aria-invalid="true"]{
   .tagline{ margin-left:0; }
 }
 
-/* Right-edge breathing room for the last (rightmost) form field on desktop */
+/* Right-edge breathing room for the rightmost form field on desktop */
 .form-grid .form-item:last-child{
   padding-right: 6px; /* subtle space from the card's right edge */
 }
 
-/* On <= 900px the last item is no longer at the right edge, so remove it */
+
 @media (max-width: 900px){
   .form-grid .form-item:last-child{
     padding-right: 0;
