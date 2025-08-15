@@ -1,21 +1,47 @@
 :root{
-  --bg: #0b0f16;
-  --card: #131a24;
-  --muted: #8aa0b4;
-  --text: #eaf2fb;
-  --brand: #3ea1ff;
-  --brand-600: #2487e1;
-  --ok: #2ecc71;
-  --warn: #ffb020;
-  --err: #ff5252;
-  --border: #223044;
-  --focus: rgba(62,161,255,.45);
+  /* Base */
+  --bg: #F6F8FF;        /* light background */
+  --card: #FFFFFF;      /* cards and tables */
+  --border: #D7E0F2;
+  --text: #23324D;      /* body text */
+  --heading: #0A1A2F;   /* h1/h2 headlines */
+  --muted: #6B7A93;
+
+  /* Brand & accents */
+  --brand: #2F80FF;     /* Electric Blue */
+  --brand-600: #1C68F3; /* hover/pressed */
+  --secondary: #9B5DE5; /* Vivid Violet */
+  --accent: #FF6B6B;    /* Coral Pop */
+  --accent-2: #00E596;  /* Spring Mint */
+  --accent-3: #FFD166;  /* Sunburst */
+
+  /* States & focus */
+  --ok: #10B981;
+  --warn: #F59E0B;
+  --err: #EF4444;
+  --focus: rgba(47,128,255,.35);
+
+  /* Light UI tints */
+  --table-head: #EEF4FF;
+  --row-odd:  #FAFCFF;
+  --row-even: #F5F8FF;
+  --row-hover:#EAF2FF;
+
+  --input-bg: #FFFFFF;
+  --alt-bg:   #F3F7FF;  /* alerts/confirmations */
 }
+
+
+
 
 *{box-sizing:border-box}
 html, body{
   margin:0; padding:0;
-  background:var(--bg); color:var(--text);
+  background:
+    radial-gradient(900px 320px at 10% -10%, rgba(47,128,255,.10), transparent 60%),
+    radial-gradient(900px 320px at 90% -10%, rgba(155,93,229,.12), transparent 60%),
+    var(--bg);
+  color: var(--text);
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
   line-height:1.45;
 }
@@ -36,9 +62,13 @@ html, body{
 }
 
 .site-header{
-  padding:24px 16px; border-bottom:1px solid var(--border);
-  background: linear-gradient(180deg, #0c1320, #0b0f16);
+  padding:24px 16px;
+  border-bottom:1px solid var(--border);
+  background:
+    linear-gradient(180deg, rgba(47,128,255,.12), rgba(155,93,229,.08)),
+    var(--bg);
 }
+
 .brand{ display:flex; align-items:center; gap:12px; }
 .logo{ width:48px; height:48px; border-radius:12px; border:1px solid var(--border); }
 h1{ font-size:1.5rem; margin:0; }
@@ -48,10 +78,8 @@ h1{ font-size:1.5rem; margin:0; }
   max-width:1100px; margin:24px auto; padding:0 16px; display:grid; gap:16px;
 }
 
-.card{
-  background:var(--card); border:1px solid var(--border);
-  border-radius:16px; padding:16px; box-shadow: 0 10px 24px rgba(0,0,0,0.25);
-}
+/* Cards & subtle shadow */
+.card{ background:var(--card); border:1px solid var(--border); box-shadow: 0 6px 16px rgba(16,33,80,.08); }
 
 h2{ margin:0 0 12px; font-size:1.2rem; }
 
@@ -64,10 +92,11 @@ thead th{
 }
 tbody td{ padding:12px; border-bottom:1px solid var(--border); }
 
-/* Alternating row colors + hover */
-tbody tr:nth-child(odd){ background: #101826; }
-tbody tr:nth-child(even){ background: #0f1420; }
-tbody tr:hover{ background:#162136; }
+/* Table tones */
+thead th{ background: var(--table-head); }
+tbody tr:nth-child(odd){ background: var(--row-odd); }
+tbody tr:nth-child(even){ background: var(--row-even); }
+tbody tr:hover{ background: var(--row-hover); }
 
 /* Buttons */
 button, .btn-primary{
@@ -75,14 +104,20 @@ button, .btn-primary{
   font-weight:600; cursor:pointer;
   transition: transform .04s ease, background .2s ease, opacity .2s ease, box-shadow .2s ease;
 }
-.btn-primary{ background:var(--brand); color:#06101e; }
-.btn-primary:hover{ background:var(--brand-600); transform: translateY(-1px); }
+.btn-primary{
+  background: var(--accent-2);        /* #00E596 */
+  color: var(--heading);              /* dark text for contrast */
+}
+
+.btn-primary:hover{
+  background: #00cf87;                /* slightly deeper mint */
+  transform: translateY(-1px);
+  filter: none;                       
+}
 .btn-primary:focus-visible{
   outline:2px solid transparent; box-shadow: 0 0 0 3px var(--focus);
 }
-.btn-primary:disabled{
-  background:#2a3a52; color:#8aa0b4; cursor:not-allowed; opacity:.85;
-}
+.btn-primary:disabled{ background:#E6ECF8; color:#9AAAC4; }
 
 /* Status badges */
 .badge{ display:inline-block; padding:3px 8px; border-radius:999px; font-size:.8rem; font-weight:600; }
@@ -130,14 +165,9 @@ label{
   width:100%;
 }
 
-input, select{
-  background:#0d1523;
-  color:var(--text);
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:10px 12px;
-  outline:none;
-}
+/* Inputs & alerts on light surfaces */
+input, select{ background: var(--input-bg); color: var(--text); border:1px solid var(--border); }
+.alert, .confirmation{ background: var(--alt-bg); }
 
 input::placeholder{ color:#6f8196; }
 
@@ -192,3 +222,60 @@ input[aria-invalid="true"], select[aria-invalid="true"]{
   }
 }
 
+/* Table and form polish and fixes */
+.table-wrapper{
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--card);
+}
+table{ border-collapse: separate; border-spacing: 0; }
+
+thead th{
+  padding: 14px 16px;
+  color: var(--heading, #0A1A2F);
+  position: sticky; top: 0; z-index: 1;
+  background: var(--table-head);
+}
+tbody td{ padding: 14px 16px; }
+
+/* Rounded corner finishing */
+thead th:first-child{ border-top-left-radius: 12px; }
+thead th:last-child{  border-top-right-radius: 12px; }
+tbody tr:last-child td:first-child{ border-bottom-left-radius: 12px; }
+tbody tr:last-child td:last-child{  border-bottom-right-radius: 12px; }
+
+/* Form sizing & spacing */
+.form-grid{ gap: 16px; }
+
+label{ margin-bottom: 6px; color: var(--heading, #0A1A2F); }
+
+.form-item input,
+.form-item select{
+  height: 42px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+}
+
+.error-text{ margin-top: 2px; }
+
+/* Left breathing room for card content + align table cells */
+.card{
+  padding: 20px 24px;          /* more space left/right, same top/bottom feel */
+}
+
+/* Keep mobile tight */
+@media (max-width: 600px){
+  .card{ padding: 16px; }
+}
+
+/* Match table cell inset to the new card padding */
+thead th,
+tbody td{
+  padding: 14px 24px;          /* was 14px 16px — bump L/R to 24 */
+}
+
+.btn-primary:active{
+  transform: translateY(0);
+}

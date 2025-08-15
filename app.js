@@ -1,6 +1,4 @@
-// -------------------------------------
-// Step 2: A11y polish + inline validation
-// -------------------------------------
+
 
 const INITIAL_EVENTS = [
   { id: "e1", name: "Tech Entrepreneurship Talk", date: "2025-09-10", venue: "Lecture Hall A", slots: 25 },
