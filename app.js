@@ -233,5 +233,4 @@ function init() {
 }
 init();
 
-// Dev reset helper (run in console if needed):
-// localStorage.removeItem("usiu_events_v1"); localStorage.removeItem("usiu_bookings_v1"); location.reload();
+
